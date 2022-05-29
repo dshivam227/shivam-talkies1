@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Shivam Talkies</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- favicon -->
+<link rel="icon" type="image/x-icon" href="../static/favicon.gif">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Auto Complete -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+
+  <link rel="stylesheet" href="/templates/styles.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="text/javascript">
+    var films = {{suggestions|tojson}};
+  </script>
+
+</head>
+
+<body id="content" style="font-family: 'Noto Sans JP', sans-serif;">
+
+  <!-- Submit error message-->
+  <!---->
+  <!-- This is what your users will see when there is-->
+  <!-- an error submitting the form-->
+  <div class="d-none" id="submitErrorMessage">
+    <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
+  </div>
+
+  <div class="ml-container" style="display: block; margin: 10%; padding: 10px;">
+
+    <center>
+      <h1 style="background-color: #1d1e1acf;text-align: center;border-color: #fc2d37;width: 100%; font-size: 3.5rem;"> Movie
+        Recommendation System</h1>
+    </center>
+
+    <div class="form-group shadow-textarea" style="margin-top: 30px;text-align: center;color: white;">
+      <input type="text" name="movie" class="movie form-control" id="autoComplete" autocomplete="off"
+        placeholder="Enter the Name of the Movie"
+        style="background-color: #302b2b;
+        border-color: #ec1111;
+        width: 50%;
+        color: #efecec;" required="required" />
+      <br>
+    </div>
+
+    <div class="form-group" style="text-align: center;">
+      <button class="btn btn-primary btn-block movie-button"
+        style="background-color: #e50914;text-align: center;border-color: #e50914;width:120px;" disabled="true"
+        id="enter">Enter</button><br><br>
+    </div>
+  </div>
+
+  <div id="loader" class="text-center">
+  </div>
+
+  <div class="fail">
+    <center>
+      <h3>Sorry! The movie you requested is not in our database.
+        Please check the spelling or try with other movies!</h3>
+    </center>
+  </div>
+
+  <div class="results">
+    <!-- <center>
+        <h2 style="none" id="name" class="text-uppercase"></h2>
+      </center> -->
+  </div>
+
+  
+
+  <!-- enter trigger -->
+
+  <script>
+    var input = document.getElementById("autoComplete");
+    input.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("enter").click();
+      }
+    });
+  </script>
+  <!-- voice recognisition -->
+ 
+  <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>
